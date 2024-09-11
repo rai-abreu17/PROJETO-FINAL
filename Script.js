@@ -36,6 +36,4 @@ perguntas = [
                 "Shanks",
                 "Big mom",
                 "Barba branca"]
-    }
-]
- teste
+    }]
