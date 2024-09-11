@@ -1,6 +1,7 @@
 // Array com as perguntas e respostas
 // Array com as perguntas e respostas
 // ensinando commit
+// teste
 
 const quizData = [
     {
