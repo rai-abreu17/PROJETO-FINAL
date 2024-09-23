@@ -2,39 +2,61 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background-color: black;
+    /*background-color: black;*/
 }
 
-#naruto{
+#naruto {
     width: 260px;
     height: 100vh;
 }
 
-#piece{
+#piece {
     width: 260px;
     height: 100vh;
 }
 
-#slayer{
+#slayer {
     width: 260px;
     height: 100vh;
 }
 
-#jujutsu{
+#jujutsu {
     width: 260px;
     height: 100vh;
 }
 
-#dragon{
+#dragon {
     width: 260px;
     height: 100vh;
 }
 
-.imagem{
+.imagem {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
     position: relative;
 }
 
-/*
+#quiz {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    /* faz com que a div sobreponha as imagens */
+    position: absolute;
+    z-index: 1;
+
+    width: 100%;
+    background-color: white;
+
+    /* efeito transparente na div */
+    opacity: 50%;
+
+}
+
+/* Caso precise alterar o estilo do botão, pegar igual o exemplo abaixo */
+/*.answer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}*/

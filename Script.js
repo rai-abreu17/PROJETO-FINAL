@@ -70,6 +70,9 @@ function loadQuestion() { //Função principal
     // Pega a pergunta atual com base no índice
     const currentQuestion = quizData[currentQuestionIndex];
     const questionElement = document.createElement('p');
+    questionElement.id = "idPergunta"
+    const buttonsContainer = document.createElement('div');  //div somente dos botões
+    buttonsContainer.id = "idButtonsContainer" // caso precise alterar a div dos botões pegar por esse id
 
     questionElement.textContent = `${currentQuestionIndex + 1}. ${currentQuestion.question}`;
     quizContainer.appendChild(questionElement);
@@ -78,10 +81,12 @@ function loadQuestion() { //Função principal
     currentQuestion.answers.forEach((answerData, index) => {
         const answerButton = document.createElement('button');
         answerButton.textContent = answerData.text;
-        answerButton.className = "answer";
+        answerButton.className = "answer"; /* class do botão -> usado para alterar css do botão */
         answerButton.onclick = () => checkAnswer(answerData.correct, index);
-        quizContainer.appendChild(answerButton);
+        buttonsContainer.appendChild(answerButton);
     });
+
+    quizContainer.appendChild(buttonsContainer); //Insere div de botões dentro da div "mãe" (quiz)
 }
 
 // Função para verificar a resposta
@@ -89,9 +94,6 @@ function checkAnswer(isCorrect, index) {
     //const feedback = document.getElementById('feedback');
     const button = document.getElementsByClassName('answer')
 
-    console.log("buttonoooooo ", button[index])
-
-    console.log("button ", button)
     if (isCorrect) {
         //feedback.textContent = "Resposta correta!";
         //feedback.style.color = "green";
@@ -129,3 +131,16 @@ function showFinalMessage() {
 
 // Carrega a primeira pergunta ao iniciar
 loadQuestion();
+
+
+
+/*
+   <div id="quiz">
+        <p id="idPergunta"> pergunta </p>
+        <div id="idButtonsContainer">
+            <button className="answer"></button>
+            <button className="answer"></button>
+            <button className="answer"></button>
+        </div>
+    </div>
+*/
