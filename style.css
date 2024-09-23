@@ -1,0 +1,40 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: black;
+}
+
+#naruto{
+    width: 260px;
+    height: 100vh;
+}
+
+#piece{
+    width: 260px;
+    height: 100vh;
+}
+
+#slayer{
+    width: 260px;
+    height: 100vh;
+}
+
+#jujutsu{
+    width: 260px;
+    height: 100vh;
+}
+
+#dragon{
+    width: 260px;
+    height: 100vh;
+}
+
+.imagem{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    position: relative;
+}
+
+/*
