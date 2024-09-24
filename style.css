@@ -70,36 +70,38 @@
     justify-content: center;
 }
 
-.green {
+.green, .orange, .red {
     width: 21px;
     height: 20px;
     border-radius: 50%;
     position: absolute; 
     z-index: 2; 
+}
+
+.green {
     background-color: #40F618;
     top: 120px; 
     left: 870px; 
-
 }
 
 .orange {
-    width: 21px;
-    height: 20px;
-    border-radius: 50%;
-    position: absolute; 
-    z-index: 2; 
     background-color: #F6A818;
     top: 120px; 
     left: 900px; 
 }
 
 .red {
-    width: 21px;
-    height: 20px;
-    border-radius: 50%;
-    position: absolute; 
-    z-index: 2;
     background-color: #F61818;
     top: 120px; 
     left: 930px; 
+}
+
+.tooltip {
+    display: none;
+    position: absolute;
+    background-color: #333;
+    color: #fff;
+    padding: 5px;
+    border-radius: 5px;
+    z-index: 1000;
 }
