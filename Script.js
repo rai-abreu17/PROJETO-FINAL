@@ -354,5 +354,44 @@ function showFinalMessage() {
 // Carrega a primeira pergunta ao iniciar
 loadQuestion();
 
+//exibir mensagem ao passa o mouse em cima do circle
+const tooltip = document.getElementById('tooltip');
+        const greenCircle = document.querySelector('.green');
 
+        greenCircle.addEventListener('mouseenter', (event) => {
+            tooltip.innerText = event.target.getAttribute('data-tooltip');
+            tooltip.style.display = 'block';
+            const rect = event.target.getBoundingClientRect();
+            tooltip.style.left = `${rect.left}px`;
+            tooltip.style.top = `${rect.bottom}px`;
+        });
+
+        greenCircle.addEventListener('mouseleave', () => {
+            tooltip.style.display = 'none';
+        });
+
+        const orangeCircle = document.querySelector('.orange');
+        orangeCircle.addEventListener('mouseenter', (event) => {
+            tooltip.innerText = event.target.getAttribute('data-tooltip');
+            tooltip.style.display = 'block';
+            const rect = event.target.getBoundingClientRect();
+            tooltip.style.left = `${rect.left}px`;
+            tooltip.style.top = `${rect.bottom}px`;
+        });
+
+        greenCircle.addEventListener('mouseleave', () => {
+            tooltip.style.display = 'none';
+        });
+
+        const redCircle = document.querySelector('.red');
+        redCircle.addEventListener('mouseenter', (event) => {
+            tooltip.innerText = event.target.getAttribute('data-tooltip');
+            tooltip.style.display = 'block';
+            const rect = event.target.getBoundingClientRect();
+            tooltip.style.left = `${rect.left}px`;
+            tooltip.style.top = `${rect.bottom}px`;
+        });
+        greenCircle.addEventListener('mouseleave', () => {
+            tooltip.style.display = 'none';
+        });
 
