@@ -70,7 +70,7 @@ function loadQuestion() { //Função principal
     // Pega a pergunta atual com base no índice
     const currentQuestion = quizData[currentQuestionIndex];
     const questionElement = document.createElement('p');
-    questionElement.id = "idPergunta"
+    questionElement.id = "idQuestion"
     const buttonsContainer = document.createElement('div');  //div somente dos botões
     buttonsContainer.id = "idButtonsContainer" // caso precise alterar a div dos botões pegar por esse id
 
