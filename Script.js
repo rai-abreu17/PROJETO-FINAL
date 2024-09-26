@@ -367,7 +367,7 @@ function checkAnswer(isCorrect, index) {
     //se completou todas as perguntas da fase
     if (currentQuestionIndex % questionsPerPhase === 0){
         if (incorrectAnswers >= maxIncorrectAnswers) {            
-            showFeatMessage(); // se errar mais de 3 respostas
+            showDeFeatMessage(); // se errar mais de 3 respostas
 
         } else {
 
@@ -376,6 +376,39 @@ function checkAnswer(isCorrect, index) {
     }else {
         loadQuestion(); //carregar proxima pergunta
       } 
+  }
+
+  //mensagem se a pessoa  vencer a fase
+  function showPhaseCompletionMessage() {
+    const quizContainer = document.getElementById('quiz');
+    let message = "";
+
+    switch (currentPhase) {
+        case 1:
+            message = "Você passou pela primeira fase!!! Se prepare para a próxima fase.";
+            break;
+        case 2:
+            message = "Você passou pela segunda fase!!! Está quase chegando lá.";
+            break;
+        case 3:
+            message ="Você é um mestre dos animes!!! Completou todas as fases";
+            break;   
+    }
+    quizContainer.innerHTML = `<p>${message}</p>`;
+    currentPhase++;
+    incorrectAnswers = 0; // reiniciar os erros na proxima fase
+
+    //avançar para a proxima fase
+    if(currentPhase <= 3) {
+        setTimeout(() =>
+        loadQuestion(), 3000);
+    }
+  }
+
+  // messagem caso a pessoa seja derrotada
+  function showDeFeatMessage() {
+    const quizContainer = document.getElementById('quiz');
+    quizContainer.innerHTML = `<P>Você errou mais de 3 respostas (|︵|)! Foi derrotado na fase ${currentPhase}!</p>`;
   }
 
 // Função para exibir a mensagem final ao término do quiz
