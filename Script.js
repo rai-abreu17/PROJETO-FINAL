@@ -292,7 +292,7 @@ let currentQuestionIndex = 0; // Índice para rastrear a pergunta atual
 let currentPhase = 1; // começar na fase 1
 let incorrectAnswers = 0; //rastreiar o numero de erros 
 
-const maxIncorrectAnswers = 3; //limite de erro por fase
+const maxIncorrectAnswers = 4; //limite de erro por fase
 const questionsPerPhase = 8; //numeros de perguntas por fase
 
 
