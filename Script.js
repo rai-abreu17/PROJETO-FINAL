@@ -4,6 +4,7 @@
 // teste
 
 const quizData = [
+    // fase 1 (8 perguntas)
     //faceis 
     {
         question: "Qual foi o primeiro Shichibukai derrotado por Luffy?",//fácil
@@ -93,6 +94,9 @@ const quizData = [
         level: 1
     },
 
+     //novos médios
+    //fase 2 (8 perguntas)
+
     {
         question: "Qual é o Hashira mais forte?",
         answers: [
@@ -101,7 +105,7 @@ const quizData = [
             { text: "Obanai", correct: false },
             { text: "Gyomei Himejima", correct: true }
         ],
-        level: 1
+        level: 2
     },
 
     {
@@ -112,7 +116,7 @@ const quizData = [
             { text: "Kaio-ken", correct: false },
             { text: "Super Saiyajin 3", correct: false }
         ],
-        level: 1
+        level: 2
     },
 
     {
@@ -123,10 +127,11 @@ const quizData = [
             { text: "10 Anos", correct: true },
             { text: "1 ano", correct: false }
         ],
-        level: 1
+        level: 2
     },
+    
+    // já eram medias daqui pra baixo
 
-    //media
     {
         question: "Qual o nome da maldição que Yuta Okkotsu carrega? ",
         answers: [
@@ -179,7 +184,9 @@ const quizData = [
         level: 2
     },
 
+    //fase 3 (8 perguntas)
     //dificil
+
     {
         question: "Qual é a técnica de expansão de domínio de Satoru Gojo?  ",
         answers: [
@@ -282,6 +289,13 @@ else {
 //let nome = prompt("Bem vindo ao Quiz, qual seu nome? ")
 
 let currentQuestionIndex = 0; // Índice para rastrear a pergunta atual
+let currentPhase = 1; // começar na fase 1
+let incorrectAnswers = 0; //rastreiar o numero de erros 
+
+const maxIncorrectAnswers = 3; //limite de erro por fase
+const questionsPerPhase = 8; //numeros de perguntas por fase
+
+
 
 // Função para carregar a pergunta atual
 function loadQuestion() { //Função principal
@@ -321,28 +335,48 @@ function checkAnswer(isCorrect, index) {
         //feedback.style.color = "green";
         button[index].style.backgroundColor = "green";
         // Espera um momento antes de carregar a próxima pergunta
-        setTimeout(() => {
-            currentQuestionIndex++;
-            if (currentQuestionIndex < quizData.length) {
-                loadQuestion(); // Carrega a próxima pergunta
-                feedback.textContent = ""; // Limpa o feedback
-            } else {
-                showFinalMessage(); // Exibe mensagem final ao término do quiz
-            }
-        }, 1000); // Atraso de 1 segundo antes de passar para a próxima pergunta
+        setTimeout(() => 
+            nextQuestion(), 1000);
+            //currentQuestionIndex++;
+           // if (currentQuestionIndex < quizData.length) {
+              //  loadQuestion(); // Carrega a próxima pergunta
+                //feedback.textContent = ""; // Limpa o feedback
+            //} else {
+              //  showFinalMessage(); // Exibe mensagem final ao término do quiz
+            //}
+        //}, 1000); // Atraso de 1 segundo antes de passar para a próxima pergunta
     } else {
+        incorrectAnswers++
         button[index].style.backgroundColor = "red";
-        setTimeout(() => {
+        setTimeout(() => 
+            nextQuestion(), 1000);
 
-            loadQuestion();
 
-        }, 1000);
+      //  }, 1000);
 
     }
     //button[index].style.backgroundColor = "#F0F0F0";
 
 
 }
+
+  //função para avançar para a proxima fase
+  function nextQuestion() {
+    currentQuestionIndex++;
+
+    //se completou todas as perguntas da fase
+    if (currentQuestionIndex % questionsPerPhase === 0){
+        if (incorrectAnswers >= maxIncorrectAnswers) {            
+            showFeatMessage(); // se errar mais de 3 respostas
+
+        } else {
+
+            showPhaseCompletionMessage(); // se fizer responder tudo certo
+        }
+    }else {
+        loadQuestion(); //carregar proxima pergunta
+      } 
+  }
 
 // Função para exibir a mensagem final ao término do quiz
 function showFinalMessage() {
