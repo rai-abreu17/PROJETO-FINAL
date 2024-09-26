@@ -288,17 +288,17 @@ function loadQuestion() {
     quizContainer.innerHTML = "";
 
     if (currentPhase === 1) {
-        const bolinha = document.createElement('div');
-        bolinha.className = "green"
-        quizContainer.appendChild(bolinha);
+        const signal = document.createElement('div');
+        signal.className = "green"
+        quizContainer.appendChild(signal);
     } if (currentPhase === 2) {
-        const bolinha = document.createElement('div');
-        bolinha.className = "orange"
-        quizContainer.appendChild(bolinha);
+        const signal = document.createElement('div');
+        signal.className = "orange"
+        quizContainer.appendChild(signal);
     } if (currentPhase === 3) {
-        const bolinha = document.createElement('div');
-        bolinha.className = "red"
-        quizContainer.appendChild(bolinha);
+        const signal = document.createElement('div');
+        signal.className = "red"
+        quizContainer.appendChild(signal);
     }
 
     // Pega a pergunta atual com base no índice
@@ -342,14 +342,7 @@ function checkAnswer(isCorrect, index) {
         button[index].style.backgroundColor = "red";
         setTimeout(() =>
             nextQuestion(), 1000);
-
-
-
-
     }
-
-
-
 }
 
 //função para avançar para a proxima fase
@@ -396,19 +389,6 @@ function showPhaseCompletionMessage() {
         setTimeout(() =>
             loadQuestion(), 3000);
     }
-}
-
-// menssagem caso a pessoa seja derrotada
-function showDeFeatMessage() {
-    const quizContainer = document.getElementById('quiz');
-    quizContainer.innerHTML = `<P>Você errou mais de 3 respostas (|︵|)! Foi derrotado na fase ${currentPhase}!</p>`;
-}
-
-// Função para exibir a mensagem final ao término do quiz
-function showFinalMessage() {
-    const quizContainer = document.getElementById('quiz');
-    quizContainer.innerHTML = "<p>Parabéns! Você completou o quiz.</p>";
-
 }
 
 // Carrega a primeira pergunta ao iniciar
