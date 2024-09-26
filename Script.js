@@ -1,24 +1,21 @@
-// Array com as perguntas e respostas
-// Array com as perguntas e respostas
-// ensinando commit
-// teste
+
 
 const quizData = [
     // fase 1 (8 perguntas)
-    //faceis 
+
     {
-        question: "Qual foi o primeiro Shichibukai derrotado por Luffy?",//fácil
+        question: "Qual foi o primeiro Shichibukai derrotado por Luffy?",
         answers: [
             { text: "Crocodile", correct: true },
             { text: "Gecko Moriah", correct: false },
             { text: "Donquixote Doflamingo", correct: false },
             { text: "Bartholomew Kuma", correct: false }
         ],
-        //fazer lá embaixo if level == 1 então mostrar bolinha  
+
         level: 1
     },
     {
-        question: "O Itadori é hospedeiro de qual desses?", //fácil
+        question: "O Itadori é hospedeiro de qual desses?",
         answers: [
             { text: "Kurama", correct: false },
             { text: "Ryomen Sukuna", correct: true },
@@ -94,7 +91,7 @@ const quizData = [
         level: 1
     },
 
-     //novos médios
+
     //fase 2 (8 perguntas)
 
     {
@@ -129,8 +126,7 @@ const quizData = [
         ],
         level: 2
     },
-    
-    // já eram medias daqui pra baixo
+
 
     {
         question: "Qual o nome da maldição que Yuta Okkotsu carrega? ",
@@ -185,7 +181,7 @@ const quizData = [
     },
 
     //fase 3 (8 perguntas)
-    //dificil
+
 
     {
         question: "Qual é a técnica de expansão de domínio de Satoru Gojo?  ",
@@ -274,41 +270,43 @@ const quizData = [
         level: 3
     }
 ];
-//definir qual o nivel da pergunta 
-//if (level == 1) {
-
-//mostrar bolinha verde  
-//}
-/*elseif (level == 2){
-    //mostrar bolinha laranja 
-}
-else {
-    //mostrar bolinha vermelha  
-}*/
-
-//let nome = prompt("Bem vindo ao Quiz, qual seu nome? ")
+let nome = prompt("Qual seu nome de jogador(a)?")
 
 let currentQuestionIndex = 0; // Índice para rastrear a pergunta atual
 let currentPhase = 1; // começar na fase 1
 let incorrectAnswers = 0; //rastreiar o numero de erros 
 
-const maxIncorrectAnswers = 4; //limite de erro por fase
+const maxIncorrectAnswers = 1; //limite de erro por fase
 const questionsPerPhase = 8; //numeros de perguntas por fase
 
 
 
 // Função para carregar a pergunta atual
-function loadQuestion() { //Função principal
+function loadQuestion() {
 
-    const quizContainer = document.getElementById('quiz'); //pega a div que tem id quiz
-    quizContainer.innerHTML = ""; // Limpa o conteúdo anterior (importante pra segunda pergunta em diante)
+    const quizContainer = document.getElementById('quiz');
+    quizContainer.innerHTML = "";
+
+    if (currentPhase === 1) {
+        const bolinha = document.createElement('div');
+        bolinha.className = "green"
+        quizContainer.appendChild(bolinha);
+    } if (currentPhase === 2) {
+        const bolinha = document.createElement('div');
+        bolinha.className = "orange"
+        quizContainer.appendChild(bolinha);
+    } if (currentPhase === 3) {
+        const bolinha = document.createElement('div');
+        bolinha.className = "red"
+        quizContainer.appendChild(bolinha);
+    }
 
     // Pega a pergunta atual com base no índice
     const currentQuestion = quizData[currentQuestionIndex];
     const questionElement = document.createElement('p');
     questionElement.id = "idQuestion"
-    const buttonsContainer = document.createElement('div');  //div somente dos botões
-    buttonsContainer.id = "idButtonsContainer" // caso precise alterar a div dos botões pegar por esse id
+    const buttonsContainer = document.createElement('div');
+    buttonsContainer.id = "idButtonsContainer"
 
     questionElement.textContent = `${currentQuestionIndex + 1}. ${currentQuestion.question}`;
     quizContainer.appendChild(questionElement);
@@ -317,105 +315,100 @@ function loadQuestion() { //Função principal
     currentQuestion.answers.forEach((answerData, index) => {
         const answerButton = document.createElement('button');
         answerButton.textContent = answerData.text;
-        answerButton.className = "answer"; /* class do botão -> usado para alterar css do botão */
+        answerButton.className = "answer";
         answerButton.onclick = () => checkAnswer(answerData.correct, index);
         buttonsContainer.appendChild(answerButton);
     });
 
-    quizContainer.appendChild(buttonsContainer); //Insere div de botões dentro da div "mãe" (quiz)
+    quizContainer.appendChild(buttonsContainer);
 }
 
 // Função para verificar a resposta
 function checkAnswer(isCorrect, index) {
-    //const feedback = document.getElementById('feedback');
+
     const button = document.getElementsByClassName('answer')
 
     if (isCorrect) {
-        //feedback.textContent = "Resposta correta!";
-        //feedback.style.color = "green";
+
         button[index].style.backgroundColor = "green";
+
+
         // Espera um momento antes de carregar a próxima pergunta
-        setTimeout(() => 
+        setTimeout(() =>
             nextQuestion(), 1000);
-            //currentQuestionIndex++;
-           // if (currentQuestionIndex < quizData.length) {
-              //  loadQuestion(); // Carrega a próxima pergunta
-                //feedback.textContent = ""; // Limpa o feedback
-            //} else {
-              //  showFinalMessage(); // Exibe mensagem final ao término do quiz
-            //}
-        //}, 1000); // Atraso de 1 segundo antes de passar para a próxima pergunta
+
     } else {
         incorrectAnswers++
         button[index].style.backgroundColor = "red";
-        setTimeout(() => 
+        setTimeout(() =>
             nextQuestion(), 1000);
 
 
-      //  }, 1000);
+
 
     }
-    //button[index].style.backgroundColor = "#F0F0F0";
+
 
 
 }
 
-  //função para avançar para a proxima fase
-  function nextQuestion() {
+//função para avançar para a proxima fase
+function nextQuestion() {
     currentQuestionIndex++;
 
-    //se completou todas as perguntas da fase
-    if (currentQuestionIndex % questionsPerPhase === 0){
-        if (incorrectAnswers >= maxIncorrectAnswers) {            
-            showDeFeatMessage(); // se errar mais de 3 respostas
-
+    if (currentQuestionIndex % questionsPerPhase === 0) {
+        showPhaseCompletionMessage();
+    } else {
+        if (incorrectAnswers < maxIncorrectAnswers) {
+            loadQuestion();
         } else {
-
-            showPhaseCompletionMessage(); // se fizer responder tudo certo
+            currentQuestionIndex = 0
+            incorrectAnswers = 0
+            loadQuestion();
+            window.alert(`Que pena ${nome}, você errou a pergunta. Tente novamente!`)
         }
-    }else {
-        loadQuestion(); //carregar proxima pergunta
-      } 
-  }
 
-  //mensagem se a pessoa  vencer a fase
-  function showPhaseCompletionMessage() {
+    }
+}
+
+//mensagem se a pessoa  vencer a fase
+function showPhaseCompletionMessage() {
     const quizContainer = document.getElementById('quiz');
     let message = "";
 
     switch (currentPhase) {
         case 1:
-            message = "Você passou pela primeira fase!!! Se prepare para a próxima fase.";
+            message = `Parabéns jogador(a) ${nome} Você passou pela primeira fase!!! Se prepare para a próxima fase.`
             break;
         case 2:
-            message = "Você passou pela segunda fase!!! Está quase chegando lá.";
+            message = `Você passou pela segunda fase jogador(a) ${nome}!!! Está quase chegando lá.`
             break;
         case 3:
-            message ="Você é um mestre dos animes!!! Completou todas as fases";
-            break;   
+            message = `Você é um mestre dos animes jogador(a) ${nome}!!! Completou todas as fases`
+            break;
     }
     quizContainer.innerHTML = `<p>${message}</p>`;
     currentPhase++;
     incorrectAnswers = 0; // reiniciar os erros na proxima fase
 
     //avançar para a proxima fase
-    if(currentPhase <= 3) {
+    if (currentPhase <= 3) {
         setTimeout(() =>
-        loadQuestion(), 3000);
+            loadQuestion(), 3000);
     }
-  }
+}
 
-  // messagem caso a pessoa seja derrotada
-  function showDeFeatMessage() {
+// menssagem caso a pessoa seja derrotada
+function showDeFeatMessage() {
     const quizContainer = document.getElementById('quiz');
     quizContainer.innerHTML = `<P>Você errou mais de 3 respostas (|︵|)! Foi derrotado na fase ${currentPhase}!</p>`;
-  }
+}
 
 // Função para exibir a mensagem final ao término do quiz
 function showFinalMessage() {
     const quizContainer = document.getElementById('quiz');
     quizContainer.innerHTML = "<p>Parabéns! Você completou o quiz.</p>";
-    //document.getElementById('feedback').textContent = ""; // Limpa o feedback
+
 }
 
 // Carrega a primeira pergunta ao iniciar
@@ -423,42 +416,44 @@ loadQuestion();
 
 //exibir mensagem ao passa o mouse em cima do circle
 const tooltip = document.getElementById('tooltip');
-        const greenCircle = document.querySelector('.green');
+const greenCircle = document.querySelector('.green');
 
-        greenCircle.addEventListener('mouseenter', (event) => {
-            tooltip.innerText = event.target.getAttribute('data-tooltip');
-            tooltip.style.display = 'block';
-            const rect = event.target.getBoundingClientRect();
-            tooltip.style.left = `${rect.left}px`;
-            tooltip.style.top = `${rect.bottom}px`;
-        });
+greenCircle.addEventListener('mouseenter', (event) => {
+    tooltip.innerText = event.target.getAttribute('data-tooltip');
+    tooltip.style.display = 'block';
+    const rect = event.target.getBoundingClientRect();
+    tooltip.style.left = `${rect.left}px`;
+    tooltip.style.top = `${rect.bottom}px`;
+});
 
-        greenCircle.addEventListener('mouseleave', () => {
-            tooltip.style.display = 'none';
-        });
+greenCircle.addEventListener('mouseleave', () => {
+    tooltip.style.display = 'none';
+});
 
-        const orangeCircle = document.querySelector('.orange');
-        orangeCircle.addEventListener('mouseenter', (event) => {
-            tooltip.innerText = event.target.getAttribute('data-tooltip');
-            tooltip.style.display = 'block';
-            const rect = event.target.getBoundingClientRect();
-            tooltip.style.left = `${rect.left}px`;
-            tooltip.style.top = `${rect.bottom}px`;
-        });
+const orangeCircle = document.querySelector('.orange');
 
-        greenCircle.addEventListener('mouseleave', () => {
-            tooltip.style.display = 'none';
-        });
+orangeCircle.addEventListener('mouseenter', (event) => {
+    tooltip.innerText = event.target.getAttribute('data-tooltip');
+    tooltip.style.display = 'block';
+    const rect = event.target.getBoundingClientRect();
+    tooltip.style.left = `${rect.left}px`;
+    tooltip.style.top = `${rect.bottom}px`;
+});
 
-        const redCircle = document.querySelector('.red');
-        redCircle.addEventListener('mouseenter', (event) => {
-            tooltip.innerText = event.target.getAttribute('data-tooltip');
-            tooltip.style.display = 'block';
-            const rect = event.target.getBoundingClientRect();
-            tooltip.style.left = `${rect.left}px`;
-            tooltip.style.top = `${rect.bottom}px`;
-        });
-        greenCircle.addEventListener('mouseleave', () => {
-            tooltip.style.display = 'none';
-        });
+greenCircle.addEventListener('mouseleave', () => {
+    tooltip.style.display = 'none';
+});
+
+const redCircle = document.querySelector('.red');
+redCircle.addEventListener('mouseenter', (event) => {
+    tooltip.innerText = event.target.getAttribute('data-tooltip');
+    tooltip.style.display = 'block';
+    const rect = event.target.getBoundingClientRect();
+    tooltip.style.left = `${rect.left}px`;
+    tooltip.style.top = `${rect.bottom}px`;
+});
+
+greenCircle.addEventListener('mouseleave', () => {
+    tooltip.style.display = 'none';
+});
 
