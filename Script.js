@@ -129,3 +129,5 @@ function showFinalMessage() {
 
 // Carrega a primeira pergunta ao iniciar
 loadQuestion();
+
+
