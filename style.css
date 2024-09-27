@@ -2,39 +2,108 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    background-color: black;
 }
 
-#naruto{
-    width: 260px;
+#naruto,
+#piece,
+#slayer,
+#jujutsu,
+#dragon {
+    width: 261px;
     height: 100vh;
 }
 
-#piece{
-    width: 260px;
-    height: 100vh;
-}
-
-#slayer{
-    width: 260px;
-    height: 100vh;
-}
-
-#jujutsu{
-    width: 260px;
-    height: 100vh;
-}
-
-#dragon{
-    width: 260px;
-    height: 100vh;
-}
-
-.imagem{
+.imagem {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
     position: relative;
+    background-color: black;
 }
 
+#quiz {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    opacity: 73%;
+    width: 650px;
+    height: 458px;
+    background-color: #D9D9D9;
+    border-radius: 30px;
+    padding: 65px 20px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+    margin-bottom: 20px;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
 
+}
+
+/* Caso precise alterar o estilo do botão, pegar igual o exemplo abaixo */
+/*.answer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}*/
+
+.answer {
+    width: 100%;
+    padding: 15px;
+    margin: 10px 0;
+    font-size: 18px;
+    border: none;
+    border-radius: 12px;
+    background-color: #FFFCFC;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    justify-content: end;
+}
+
+#idQuestion {
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.green {
+    width: 21px;
+    height: 20px;
+    border-radius: 50%;
+    position: absolute;
+    z-index: 2;
+    background-color: #40F618;
+    top: 120px;
+    left: 870px;
+
+}
+
+.orange {
+    width: 21px;
+    height: 20px;
+    border-radius: 50%;
+    position: absolute;
+    z-index: 2;
+    background-color: #F6A818;
+    top: 120px;
+    left: 900px;
+}
+
+.red {
+    width: 21px;
+    height: 20px;
+    border-radius: 50%;
+    position: absolute;
+    z-index: 2;
+    background-color: #F61818;
+    top: 120px;
+    left: 930px;
+}
