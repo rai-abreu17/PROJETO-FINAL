@@ -81,8 +81,8 @@
     position: absolute;
     z-index: 2;
     background-color: #40F618;
-    top: 120px;
-    left: 870px;
+    top: 30px;
+    left: 590px;
 
 }
 
@@ -93,8 +93,8 @@
     position: absolute;
     z-index: 2;
     background-color: #F6A818;
-    top: 120px;
-    left: 900px;
+    top: 30px;
+    left: 590px;
 }
 
 .red {
@@ -104,6 +104,6 @@
     position: absolute;
     z-index: 2;
     background-color: #F61818;
-    top: 120px;
-    left: 930px;
+    top: 30px;
+    left: 590px;
 }
