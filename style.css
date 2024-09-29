@@ -41,7 +41,7 @@
     margin-bottom: 20px;
     font-family: "Poppins", sans-serif;
     font-weight: 600;
-
+    
 }
 
 /* Caso precise alterar o estilo do botão, pegar igual o exemplo abaixo */
@@ -83,7 +83,8 @@
     background-color: #40F618;
     top: 30px;
     left: 590px;
-
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4), 0 5px 15px rgba(0, 0, 0, 0.3);
+    opacity: 100%;
 }
 
 .orange {
@@ -95,6 +96,8 @@
     background-color: #F6A818;
     top: 30px;
     left: 590px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4), 0 5px 15px rgba(0, 0, 0, 0.3);
+    opacity: 100%;
 }
 
 .red {
@@ -106,6 +109,18 @@
     background-color: #F61818;
     top: 30px;
     left: 590px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4), 0 5px 15px rgba(0, 0, 0, 0.3);
+    opacity: 100%;
+}
+
+.tooltip {
+    display: none;
+    position: absolute;
+    background-color: #333;
+    color: #fff;
+    padding: 5px;
+    border-radius: 5px;
+    z-index: 1000;
 }
 
 /* responsividade */
@@ -115,5 +130,3 @@
         padding: 10px;
     }
 }
-    
-
