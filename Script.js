@@ -291,11 +291,11 @@ function loadQuestion() {
         const signal = document.createElement('div');
         signal.className = "green"
         quizContainer.appendChild(signal);
-    } if (currentPhase === 2) {
+    } else if (currentPhase === 2) {
         const signal = document.createElement('div');
         signal.className = "orange"
         quizContainer.appendChild(signal);
-    } if (currentPhase === 3) {
+    } else if (currentPhase === 3) {
         const signal = document.createElement('div');
         signal.className = "red"
         quizContainer.appendChild(signal);
@@ -355,10 +355,11 @@ function nextQuestion() {
         if (incorrectAnswers < maxIncorrectAnswers) {
             loadQuestion();
         } else {
+            currentPhase = 1;
             currentQuestionIndex = 0
             incorrectAnswers = 0
             loadQuestion();
-            window.alert(`Que pena ${nome}, você errou a pergunta. Tente novamente!`)
+            window.alert(`Que pena ${nome}, você foi derrotado. Tente novamente!`)
         }
 
     }
@@ -395,6 +396,7 @@ function showPhaseCompletionMessage() {
 loadQuestion();
 
 //exibir mensagem ao passa o mouse em cima do circle
+//Não sei pra que serve essa parte se tirar não faz diferença 
 const tooltip = document.getElementById('tooltip');
 const greenCircle = document.querySelector('.green');
 
