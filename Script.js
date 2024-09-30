@@ -274,28 +274,33 @@ function loadQuestion() {
     const quizContainer = document.getElementById('quiz');
     quizContainer.innerHTML = "";
 
+    let signalClass = "";
+    let signalTooltip = "";
+
     if (currentPhase === 1) {
-        const signal = document.createElement('div');
-        signal.className = "green"
-        signal.setAttribute("data-tooltip", "Questões de nível fácil");
-        quizContainer.appendChild(signal);
+        signalClass = "green";
+        signalTooltip = 'Questões de nível fácil';
     } else if (currentPhase === 2) {
-        const signal = document.createElement('div');
-        signal.className = "orange"
-        signal.setAttribute("data-tooltip", "Questões de nível médio");
-        quizContainer.appendChild(signal);
+        signalClass = "orange";
+        signalTooltip = 'Questões de nível médio';
     } else if (currentPhase === 3) {
-        const signal = document.createElement('div');
-        signal.className = "red"
-        signal.setAttribute("data-tooltip", "Questões de nível difícil");
-        quizContainer.appendChild(signal);
+        signalClass = "red";
+        signalTooltip = 'Questões de nível difícil';
     }
+
+    const signal = document.createElement('div');
+    signal.className = signalClass;
+    signal.setAttribute("data-tooltip", signalTooltip);
+    quizContainer.appendChild(signal);
+
+    addTooltipEvents(signalClass);
 
     const currentQuestion = quizData[currentQuestionIndex];
     const questionElement = document.createElement('p');
-    questionElement.id = "idQuestion"
+    questionElement.id = "idQuestion";
+
     const buttonsContainer = document.createElement('div');
-    buttonsContainer.id = "idButtonsContainer"
+    buttonsContainer.id = "idButtonsContainer";
 
     questionElement.textContent = `${currentQuestionIndex + 1}. ${currentQuestion.question}`;
     quizContainer.appendChild(questionElement);
