@@ -1,7 +1,4 @@
-
-
 const quizData = [
-    // fase 1 (8 perguntas)
 
     {
         question: "Qual foi o primeiro Shichibukai derrotado por Luffy?",
@@ -91,9 +88,6 @@ const quizData = [
         level: 1
     },
 
-
-    //fase 2 (8 perguntas)
-
     {
         question: "Qual é o Hashira mais forte?",
         answers: [
@@ -179,9 +173,6 @@ const quizData = [
         ],
         level: 2
     },
-
-    //fase 3 (8 perguntas)
-
 
     {
         question: "Qual é a técnica de expansão de domínio de Satoru Gojo?  ",
@@ -272,16 +263,12 @@ const quizData = [
 ];
 let nome = prompt("Qual seu nome de jogador(a)?")
 
-let currentQuestionIndex = 0; // Índice para rastrear a pergunta atual
-let currentPhase = 1; // começar na fase 1
-let incorrectAnswers = 0; //rastreiar o numero de erros 
+let currentQuestionIndex = 0;
+let currentPhase = 1;
+let incorrectAnswers = 0;
+const maxIncorrectAnswers = 1;
+const questionsPerPhase = 8;
 
-const maxIncorrectAnswers = 1; //limite de erro por fase
-const questionsPerPhase = 8; //numeros de perguntas por fase
-
-
-
-// Função para carregar a pergunta atual
 function loadQuestion() {
 
     const quizContainer = document.getElementById('quiz');
@@ -304,7 +291,6 @@ function loadQuestion() {
         quizContainer.appendChild(signal);
     }
 
-    // Pega a pergunta atual com base no índice
     const currentQuestion = quizData[currentQuestionIndex];
     const questionElement = document.createElement('p');
     questionElement.id = "idQuestion"
@@ -314,7 +300,6 @@ function loadQuestion() {
     questionElement.textContent = `${currentQuestionIndex + 1}. ${currentQuestion.question}`;
     quizContainer.appendChild(questionElement);
 
-    // Cria botões para as respostas
     currentQuestion.answers.forEach((answerData, index) => {
         const answerButton = document.createElement('button');
         answerButton.textContent = answerData.text;
@@ -326,7 +311,6 @@ function loadQuestion() {
     quizContainer.appendChild(buttonsContainer);
 }
 
-// Função para verificar a resposta
 function checkAnswer(isCorrect, index) {
 
     const button = document.getElementsByClassName('answer')
@@ -335,8 +319,6 @@ function checkAnswer(isCorrect, index) {
 
         button[index].style.backgroundColor = "green";
 
-
-        // Espera um momento antes de carregar a próxima pergunta
         setTimeout(() =>
             nextQuestion(), 1000);
 
@@ -348,23 +330,8 @@ function checkAnswer(isCorrect, index) {
     }
 }
 
-//função para avançar para a proxima fase
 function nextQuestion() {
     currentQuestionIndex++;
-    
-        if (currentQuestionIndex % questionsPerPhase === 0) {
-            showPhaseCompletionMessage();
-        } else {
-            if (incorrectAnswers < maxIncorrectAnswers) {
-                loadQuestion();
-            } else {
-                currentPhase = 1;
-                currentQuestionIndex = 0
-                incorrectAnswers = 0
-                loadQuestion();
-                window.alert(`Que pena ${nome}, você errou a pergunta. Tente novamente!`)
-      }
-}}
 
     if (currentQuestionIndex % questionsPerPhase === 0) {
         showPhaseCompletionMessage();
@@ -376,12 +343,11 @@ function nextQuestion() {
             currentQuestionIndex = 0
             incorrectAnswers = 0
             loadQuestion();
-            window.alert(`Que pena ${nome}, você foi derrotado. Tente novamente!`)
+            window.alert(`Que pena ${nome}, você errou a pergunta. Tente novamente!`)
+        }
     }
-
 }
 
-//mensagem se a pessoa  vencer a fase
 function showPhaseCompletionMessage() {
     const quizContainer = document.getElementById('quiz');
     let message = "";
@@ -399,23 +365,18 @@ function showPhaseCompletionMessage() {
     }
     quizContainer.innerHTML = `<p>${message}</p>`;
     currentPhase++;
-    incorrectAnswers = 0; // reiniciar os erros na proxima fase
+    incorrectAnswers = 0;
 
-    //avançar para a proxima fase
     if (currentPhase <= 3) {
         setTimeout(() =>
             loadQuestion(), 3000);
     }
 }
 
-// Carrega a primeira pergunta ao iniciar
 loadQuestion();
 
-//exibir mensagem ao passa o mouse em cima do circle
-//Não sei pra que serve essa parte se tirar não faz diferença 
 const tooltip = document.getElementById('tooltip');
 
-// Função para adicionar eventos de mouse nos círculos de cada fase
 function addTooltipEvents(circleClass) {
     const circle = document.querySelector(`.${circleClass}`);
     circle.addEventListener('mouseenter', (event) => {
@@ -424,7 +385,7 @@ function addTooltipEvents(circleClass) {
         tooltip.style.display = 'block';
         const rect = event.target.getBoundingClientRect();
         tooltip.style.left = `${rect.left}px`;
-        tooltip.style.top = `${rect.bottom + 5}px`; // Ajusta a posição abaixo do círculo
+        tooltip.style.top = `${rect.bottom + 5}px`;
     });
 
     circle.addEventListener('mouseleave', () => {
@@ -432,7 +393,6 @@ function addTooltipEvents(circleClass) {
     });
 }
 
-// Adiciona eventos para todos os círculos de fases
 addTooltipEvents('green');
 addTooltipEvents('orange');
 addTooltipEvents('red');
