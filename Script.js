@@ -289,18 +289,18 @@ function loadQuestion() {
 
     if (currentPhase === 1) {
         const signal = document.createElement('div');
-        signal.className = "green" 
-        signal.setAttribute("data-tooltip", "Questões de nível fácil"); 
+        signal.className = "green"
+        signal.setAttribute("data-tooltip", "Questões de nível fácil");
         quizContainer.appendChild(signal);
-    } if (currentPhase === 2) {
+    } else if (currentPhase === 2) {
         const signal = document.createElement('div');
         signal.className = "orange"
-        signal.setAttribute("data-tooltip", "Questões de nível médio");  
+        signal.setAttribute("data-tooltip", "Questões de nível médio");
         quizContainer.appendChild(signal);
-    } if (currentPhase === 3) {
+    } else if (currentPhase === 3) {
         const signal = document.createElement('div');
-        signal.className = "red" 
-        signal.setAttribute("data-tooltip", "Questões de nível difícil"); 
+        signal.className = "red"
+        signal.setAttribute("data-tooltip", "Questões de nível difícil");
         quizContainer.appendChild(signal);
     }
 
@@ -366,6 +366,21 @@ function nextQuestion() {
       }
 }}
 
+    if (currentQuestionIndex % questionsPerPhase === 0) {
+        showPhaseCompletionMessage();
+    } else {
+        if (incorrectAnswers < maxIncorrectAnswers) {
+            loadQuestion();
+        } else {
+            currentPhase = 1;
+            currentQuestionIndex = 0
+            incorrectAnswers = 0
+            loadQuestion();
+            window.alert(`Que pena ${nome}, você foi derrotado. Tente novamente!`)
+    }
+
+}
+
 //mensagem se a pessoa  vencer a fase
 function showPhaseCompletionMessage() {
     const quizContainer = document.getElementById('quiz');
@@ -396,7 +411,8 @@ function showPhaseCompletionMessage() {
 // Carrega a primeira pergunta ao iniciar
 loadQuestion();
 
-//exibir mensagem ao passar o mouse em cima do círculo
+//exibir mensagem ao passa o mouse em cima do circle
+//Não sei pra que serve essa parte se tirar não faz diferença 
 const tooltip = document.getElementById('tooltip');
 
 // Função para adicionar eventos de mouse nos círculos de cada fase
@@ -413,7 +429,8 @@ function addTooltipEvents(circleClass) {
 
     circle.addEventListener('mouseleave', () => {
         tooltip.style.display = 'none';
-    });}
+    });
+}
 
 // Adiciona eventos para todos os círculos de fases
 addTooltipEvents('green');
