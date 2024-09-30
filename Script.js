@@ -351,21 +351,20 @@ function checkAnswer(isCorrect, index) {
 //função para avançar para a proxima fase
 function nextQuestion() {
     currentQuestionIndex++;
-
-    if (currentQuestionIndex % questionsPerPhase === 0) {
-        showPhaseCompletionMessage();
-    } else {
-        if (incorrectAnswers < maxIncorrectAnswers) {
-            loadQuestion();
+    
+        if (currentQuestionIndex % questionsPerPhase === 0) {
+            showPhaseCompletionMessage();
         } else {
-            currentQuestionIndex = 0
-            incorrectAnswers = 0
-            loadQuestion();
-            window.alert(`Que pena ${nome}, você errou a pergunta. Tente novamente!`)
-        }
-
-    }
-}
+            if (incorrectAnswers < maxIncorrectAnswers) {
+                loadQuestion();
+            } else {
+                currentPhase = 1;
+                currentQuestionIndex = 0
+                incorrectAnswers = 0
+                loadQuestion();
+                window.alert(`Que pena ${nome}, você errou a pergunta. Tente novamente!`)
+      }
+}}
 
 //mensagem se a pessoa  vencer a fase
 function showPhaseCompletionMessage() {
@@ -420,4 +419,3 @@ function addTooltipEvents(circleClass) {
 addTooltipEvents('green');
 addTooltipEvents('orange');
 addTooltipEvents('red');
-
