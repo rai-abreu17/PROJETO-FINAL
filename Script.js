@@ -249,7 +249,7 @@ const quizData = [
     },
 
     {
-        question: "Qual é a técnica que permite a Goku e outros Saiyajins transformarem-se em Super Saiyajin Blue?",
+        question: "Qual é a técnica que permite a Goku transforma-se em Super Saiyajin Blue?",
         answers: [
             { text: "Kamehameha", correct: false },
             { text: "Super Saiyajin Deus", correct: true },
@@ -260,7 +260,7 @@ const quizData = [
     },
 
     {
-        question: "Qual é o nome do clã que possui a Técnica Amaldiçoada Manipulação das Dez Sombras, utilizada por Megumi Fushiguro em Jujutsu Kaisen ? ",
+        question: "Qual é o nome do clã que possui a Técnica Amaldiçoada Manipulação das Dez Sombras, utilizada por Megumi Fushiguro em Jujutsu Kaisen? ",
         answers: [
             { text: "Clã Kamo ", correct: false },
             { text: "Clã Gojo ", correct: false },
@@ -290,14 +290,17 @@ function loadQuestion() {
     if (currentPhase === 1) {
         const signal = document.createElement('div');
         signal.className = "green"
+        signal.setAttribute("data-tooltip", "Questões de nível fácil");
         quizContainer.appendChild(signal);
     } else if (currentPhase === 2) {
         const signal = document.createElement('div');
         signal.className = "orange"
+        signal.setAttribute("data-tooltip", "Questões de nível médio");
         quizContainer.appendChild(signal);
     } else if (currentPhase === 3) {
         const signal = document.createElement('div');
         signal.className = "red"
+        signal.setAttribute("data-tooltip", "Questões de nível difícil");
         quizContainer.appendChild(signal);
     }
 
@@ -398,44 +401,26 @@ loadQuestion();
 //exibir mensagem ao passa o mouse em cima do circle
 //Não sei pra que serve essa parte se tirar não faz diferença 
 const tooltip = document.getElementById('tooltip');
-const greenCircle = document.querySelector('.green');
 
-greenCircle.addEventListener('mouseenter', (event) => {
-    tooltip.innerText = event.target.getAttribute('data-tooltip');
-    tooltip.style.display = 'block';
-    const rect = event.target.getBoundingClientRect();
-    tooltip.style.left = `${rect.left}px`;
-    tooltip.style.top = `${rect.bottom}px`;
-});
+// Função para adicionar eventos de mouse nos círculos de cada fase
+function addTooltipEvents(circleClass) {
+    const circle = document.querySelector(`.${circleClass}`);
+    circle.addEventListener('mouseenter', (event) => {
+        const tooltipText = event.target.getAttribute('data-tooltip');
+        tooltip.innerText = tooltipText;
+        tooltip.style.display = 'block';
+        const rect = event.target.getBoundingClientRect();
+        tooltip.style.left = `${rect.left}px`;
+        tooltip.style.top = `${rect.bottom + 5}px`; // Ajusta a posição abaixo do círculo
+    });
 
-greenCircle.addEventListener('mouseleave', () => {
-    tooltip.style.display = 'none';
-});
+    circle.addEventListener('mouseleave', () => {
+        tooltip.style.display = 'none';
+    });
+}
 
-const orangeCircle = document.querySelector('.orange');
-
-orangeCircle.addEventListener('mouseenter', (event) => {
-    tooltip.innerText = event.target.getAttribute('data-tooltip');
-    tooltip.style.display = 'block';
-    const rect = event.target.getBoundingClientRect();
-    tooltip.style.left = `${rect.left}px`;
-    tooltip.style.top = `${rect.bottom}px`;
-});
-
-greenCircle.addEventListener('mouseleave', () => {
-    tooltip.style.display = 'none';
-});
-
-const redCircle = document.querySelector('.red');
-redCircle.addEventListener('mouseenter', (event) => {
-    tooltip.innerText = event.target.getAttribute('data-tooltip');
-    tooltip.style.display = 'block';
-    const rect = event.target.getBoundingClientRect();
-    tooltip.style.left = `${rect.left}px`;
-    tooltip.style.top = `${rect.bottom}px`;
-});
-
-greenCircle.addEventListener('mouseleave', () => {
-    tooltip.style.display = 'none';
-});
+// Adiciona eventos para todos os círculos de fases
+addTooltipEvents('green');
+addTooltipEvents('orange');
+addTooltipEvents('red');
 
