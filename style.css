@@ -4,6 +4,10 @@
     box-sizing: border-box;
 }
 
+body {
+    overflow-x: hidden; 
+}
+
 #naruto,
 #piece,
 #slayer,
@@ -194,23 +198,51 @@
     z-index: 1000; /* Faixa logo atrás do personagem */
 }
     
-
-.show-muzan #muzan {
-    left: 0;
+@keyframes slideIn {
+    0% {
+        transform: translateX(-110%); /* Sai de uma posição mais segura fora da tela */
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
 }
 
-.show-muzan .faixa {
-    left: -500px;
+@keyframes slideOut {
+    0% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(110%); /* Desaparece para uma posição segura */
+        opacity: 0;
+    }
 }
 
-.hide-muzan #muzan {
-    left: 1500px;
+.show-muzan {
+    animation: slideIn 3s forwards; 
 }
 
-.hide-muzan .faixa {
-    left: 3000px;
+.hide-muzan {
+    animation: slideOut 2s forwards; 
 }
 
+.show-kaidou {
+    animation: slideIn 3s forwards; 
+}
+
+.hide-kaidou{
+    animation: slideOut 2s forwards; 
+}
+
+.show-sakuna {
+    animation: slideIn 3s forwards; 
+}
+
+.hide-sakuna{
+    animation: slideOut 2s forwards; 
+}
 
 /* responsividade */
 @media screen and (max-width: 600px){

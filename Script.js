@@ -261,7 +261,26 @@ const quizData = [
         level: 3
     }
 ];
+
+function showMuzanAndFaixa() {
+    const muzans = document.getElementById('muzan');
+    const faixa = document.querySelector('.faixa');
+
+    muzans.classList.add('show-muzan');
+    faixa.classList.add('show-muzan');
+
+    // Depois de um tempo, inicia a animação de saída
+    setTimeout(() => {
+        muzans.classList.remove('show-muzan');
+        muzans.classList.add('hide-muzan');
+        faixa.classList.remove('show-muzan');
+        faixa.classList.add('hide-muzan');
+    }, 3000); // Tempo antes de iniciar a saída (3 segundos aqui)
+}
+
+
 let nome = prompt("Qual seu nome de jogador(a)?")
+
 
 let currentQuestionIndex = 0;
 let currentPhase = 1;
@@ -379,7 +398,7 @@ function showPhaseCompletionMessage() {
 }
 
 loadQuestion();
-
+showMuzanAndFaixa();
 const tooltip = document.getElementById('tooltip');
 
 function addTooltipEvents(circleClass) {
