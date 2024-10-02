@@ -336,22 +336,22 @@ function checkAnswer(isCorrect, index) {
 }
 
 function nextQuestion() {
+    if (incorrectAnswers >= maxIncorrectAnswers) {
+        currentPhase = 1;
+        currentQuestionIndex = 0;
+        incorrectAnswers = 0;
+        loadQuestion();
+        window.alert(`Que pena ${nome}, você errou a pergunta. Tente novamente!`);
+        return;
+    }
     currentQuestionIndex++;
-
     if (currentQuestionIndex % questionsPerPhase === 0) {
         showPhaseCompletionMessage();
     } else {
-        if (incorrectAnswers < maxIncorrectAnswers) {
-            loadQuestion();
-        } else {
-            currentPhase = 1;
-            currentQuestionIndex = 0
-            incorrectAnswers = 0
-            loadQuestion();
-            window.alert(`Que pena ${nome}, você errou a pergunta. Tente novamente!`)
-        }
+        loadQuestion();
     }
 }
+
 
 function showPhaseCompletionMessage() {
     const quizContainer = document.getElementById('quiz');
