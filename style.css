@@ -80,7 +80,7 @@
     border-radius: 50%;
     position: absolute;
     z-index: 2;
-    background-color: #40F618;
+    background-color: hsl(120, 100%, 40%);
     top: 30px;
     left: 590px;
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4), 0 5px 15px rgba(0, 0, 0, 0.3);
@@ -93,7 +93,7 @@
     border-radius: 50%;
     position: absolute;
     z-index: 2;
-    background-color: #F6A818;
+    background-color: hsl(39, 100%, 48%);
     top: 30px;
     left: 590px;
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4), 0 5px 15px rgba(0, 0, 0, 0.3);
@@ -106,7 +106,7 @@
     border-radius: 50%;
     position: absolute;
     z-index: 2;
-    background-color: #F61818;
+    background-color: hsl(0, 100%, 50%);
     top: 30px;
     left: 590px;
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4), 0 5px 15px rgba(0, 0, 0, 0.3);
