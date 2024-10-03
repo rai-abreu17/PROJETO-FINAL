@@ -167,7 +167,7 @@ body {
     z-index: 1001;
 }/* Garanta que a imagem do personagem esteja na frente da faixa */
     
-.faixa_kaidou{
+/*.faixa_kaidou{
     background-color: rgba(0, 0, 0, 0.5);
     width: 850px;
     height: 250px;
@@ -176,7 +176,7 @@ body {
     bottom: 80px;
     transition: left 2s ease-in-out;
     z-index: 1000; /* Faixa logo atrás do personagem */
-}
+
 
 #sakuna {
     position: absolute;
@@ -187,7 +187,7 @@ body {
     z-index: 1001;
 }/* Garanta que a imagem do personagem esteja na frente da faixa */
 
-.faixa_sakuna{
+/*.faixa_sakuna{
     background-color: rgba(0, 0, 0, 0.5);
     width: 850px;
     height: 150px;
@@ -196,7 +196,7 @@ body {
     bottom: 180px;
     transition: left 2s ease-in-out;
     z-index: 1000; /* Faixa logo atrás do personagem */
-}
+
     
 @keyframes slideIn {
     0% {

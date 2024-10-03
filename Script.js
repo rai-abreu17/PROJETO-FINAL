@@ -262,21 +262,21 @@ const quizData = [
     }
 ];
 
-function showMuzanAndFaixa() {
-    const muzans = document.getElementById('muzan');
-    const faixa = document.querySelector('.faixa');
+///function showMuzanAndFaixa() {
+  //  const muzans = document.getElementById('muzan');
+    //const faixa = document.querySelector('.faixa');
 
-    muzans.classList.add('show-muzan');
-    faixa.classList.add('show-muzan');
+//    muzans.classList.add('show-muzan');
+  //  faixa.classList.add('show-muzan');
 
     // Depois de um tempo, inicia a animação de saída
-    setTimeout(() => {
-        muzans.classList.remove('show-muzan');
-        muzans.classList.add('hide-muzan');
-        faixa.classList.remove('show-muzan');
-        faixa.classList.add('hide-muzan');
-    }, 3000); // Tempo antes de iniciar a saída (3 segundos aqui)
-}
+ //   /setTimeout(() => {
+   //     muzans.classList.remove('show-muzan');
+     //   muzans.classList.add('hide-muzan');
+       // faixa.classList.remove('show-muzan');
+       // faixa.classList.add('hide-muzan');
+    //}, 3000); // Tempo antes de iniciar a saída (3 segundos aqui)
+//}
 
 
 let nome = prompt("Qual seu nome de jogador(a)?")
@@ -287,6 +287,8 @@ let currentPhase = 1;
 let incorrectAnswers = 0;
 const maxIncorrectAnswers = 1;
 const questionsPerPhase = 8;
+let hasShownImageForPhase = false;  // Controle para exibir a imagem uma vez por fase
+
 
 function loadQuestion() {
 
@@ -333,8 +335,91 @@ function loadQuestion() {
     });
 
     quizContainer.appendChild(buttonsContainer);
+
+     // Exibir a imagem e a faixa apenas uma vez por fase
+     if (!hasShownImageForPhase) {
+        showMuzanAndFaixa();
+        hasShownImageForPhase = true;  // Marcar que já exibiu a imagem para esta fase
+    } 
+}
+   
+function showMuzanAndFaixa() {
+    const muzans = document.getElementById('muzan');
+    const kaidou = document.getElementById('kaidou');
+    const sakuna = document.getElementById('sakuna');
+    const faixa = document.querySelector('.faixa');
+    const faixa_sakuna = document.querySelector('.faixa');
+    const faixa_kaidou = document.querySelector('.faixa');
+
+    // Ocultar todas as imagens antes de mostrar a atual
+    muzans.style.display = "none";
+    kaidou.style.display = "none";
+    sakuna.style.display = "none";
+    
+
+    // Remover classes de saída para garantir que não atrapalhem a próxima animação
+    faixa.classList.remove('show-muzan', 'hide-muzan', 'show-kaidou', 'hide-kaidou', 'show-sakuna', 'hide-sakuna');
+    muzans.classList.remove('hide-muzan');
+    kaidou.classList.remove('hide-kaidou');
+    sakuna.classList.remove('hide-sakuna');
+
+    // Mostrar a imagem da fase atual com a faixa correta
+    switch (currentPhase) {
+        case 1:
+            muzans.style.display = "block";
+            faixa.classList.add('show-muzan');
+            break;
+        case 2:
+            kaidou.style.display = "block";
+            faixa.classList.add('show-kaidou');
+            break;
+        case 3:
+            sakuna.style.display = "block";
+            faixa.classList.add('show-sakuna');
+            break;
+    }
+
+    // Iniciar animação de saída após um tempo
+    setTimeout(() => {
+        // Remover as classes de entrada e adicionar as de saída
+        faixa.classList.remove(`show-${getCurrentCharacter()}`);
+        faixa.classList.add(`hide-${getCurrentCharacter()}`);
+        
+        switch (currentPhase) {
+            case 1:
+                muzans.classList.remove('show-muzan');
+                muzans.classList.add('hide-muzan');
+                break;
+            case 2:
+                kaidou.classList.remove('show-kaidou');
+                kaidou.classList.add('hide-kaidou');
+                break;
+            case 3:
+                sakuna.classList.remove('show-sakuna');
+                sakuna.classList.add('hide-sakuna');
+                break;
+        }
+
+        // Ocultar os elementos após a animação de saída
+        setTimeout(() => {
+            muzans.style.display = "none";
+            kaidou.style.display = "none";
+            sakuna.style.display = "none";
+
+        }, 2000); // Tempo para a animação de saída
+    }, 3000); // Tempo de exibição antes da animação de saída
 }
 
+function getCurrentCharacter() {
+    switch (currentPhase) {
+        case 1:
+            return "muzan";
+        case 2:
+            return "kaidou";
+        case 3:
+            return "sakuna";
+    }
+}
 function checkAnswer(isCorrect, index) {
 
     const button = document.getElementsByClassName('answer')
@@ -366,6 +451,7 @@ function nextQuestion() {
     currentQuestionIndex++;
     if (currentQuestionIndex % questionsPerPhase === 0) {
         showPhaseCompletionMessage();
+        
     } else {
         loadQuestion();
     }
@@ -391,14 +477,19 @@ function showPhaseCompletionMessage() {
     currentPhase++;
     incorrectAnswers = 0;
 
+
     if (currentPhase <= 3) {
-        setTimeout(() =>
-            loadQuestion(), 3000);
+        // Exibir a nova imagem apenas no início da fase
+        setTimeout(() => {
+            showMuzanAndFaixa(); // Mover a exibição da imagem aqui
+            loadQuestion();
+        }, 3000);
     }
 }
 
+
 loadQuestion();
-showMuzanAndFaixa();
+
 const tooltip = document.getElementById('tooltip');
 
 function addTooltipEvents(circleClass) {
