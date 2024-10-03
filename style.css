@@ -4,10 +4,6 @@
     box-sizing: border-box;
 }
 
-body {
-    overflow-x: hidden; 
-}
-
 #naruto,
 #piece,
 #slayer,
@@ -57,7 +53,6 @@ body {
 
 .answer {
     width: 100%;
-    height: 55px;
     padding: 15px;
     margin: 10px 0;
     font-size: 18px;
@@ -126,122 +121,6 @@ body {
     padding: 5px;
     border-radius: 5px;
     z-index: 1000;
-}
-
-.personagem-container {
-    position: absolute;
-    width: fit-content;
-    top: 50%; /* Ajuste conforme necessário */
-    left: 50%; /* Ajuste conforme necessário */
-    transform: translate(-50%, -50%);
-    z-index: 1000; /* Certifique-se de que o personagem esteja na frente */
-}
-
-#muzan {
-    position: absolute;
-    width: 300px;
-    left: -150px;
-    bottom: -80px;
-    transition: left 2s ease-in-out;
-    z-index: 1001; 
-}/* Garanta que a imagem do personagem esteja na frente da faixa */
-
-
-.faixa {
-    background-color: rgba(0, 0, 0, 0.5);
-    width: 850px;
-    height: 150px;
-    position: absolute;
-    left: -200px;
-    bottom: -80px;
-    transition: left 2s ease-in-out;
-    z-index: 1000; /* Faixa logo atrás do personagem */
-}
-
-#kaidou {
-    position: absolute;
-    width: 300px;
-    left: 500px;
-    bottom: 80px;
-    transition: left 2s ease-in-out;
-    z-index: 1001;
-}/* Garanta que a imagem do personagem esteja na frente da faixa */
-    
-/*.faixa_kaidou{
-    background-color: rgba(0, 0, 0, 0.5);
-    width: 850px;
-    height: 250px;
-    position: absolute;
-    left: 500px;
-    bottom: 80px;
-    transition: left 2s ease-in-out;
-    z-index: 1000; /* Faixa logo atrás do personagem */
-
-
-#sakuna {
-    position: absolute;
-    width: 300px;
-    left: 500px;
-    bottom: 180px;
-    transition: left 2s ease-in-out;
-    z-index: 1001;
-}/* Garanta que a imagem do personagem esteja na frente da faixa */
-
-/*.faixa_sakuna{
-    background-color: rgba(0, 0, 0, 0.5);
-    width: 850px;
-    height: 150px;
-    position: absolute;
-    left: 500px;
-    bottom: 180px;
-    transition: left 2s ease-in-out;
-    z-index: 1000; /* Faixa logo atrás do personagem */
-
-    
-@keyframes slideIn {
-    0% {
-        transform: translateX(-110%); /* Sai de uma posição mais segura fora da tela */
-        opacity: 0;
-    }
-    100% {
-        transform: translateX(0);
-        opacity: 1;
-    }
-}
-
-@keyframes slideOut {
-    0% {
-        transform: translateX(0);
-        opacity: 1;
-    }
-    100% {
-        transform: translateX(110%); /* Desaparece para uma posição segura */
-        opacity: 0;
-    }
-}
-
-.show-muzan {
-    animation: slideIn 3s forwards; 
-}
-
-.hide-muzan {
-    animation: slideOut 2s forwards; 
-}
-
-.show-kaidou {
-    animation: slideIn 3s forwards; 
-}
-
-.hide-kaidou{
-    animation: slideOut 2s forwards; 
-}
-
-.show-sakuna {
-    animation: slideIn 3s forwards; 
-}
-
-.hide-sakuna{
-    animation: slideOut 2s forwards; 
 }
 
 /* responsividade */
