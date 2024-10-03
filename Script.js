@@ -263,7 +263,6 @@ const quizData = [
 ];
 let nome = prompt("Qual seu nome de jogador(a)?")
 
-
 let currentQuestionIndex = 0;
 let currentPhase = 1;
 let incorrectAnswers = 0;
@@ -348,7 +347,6 @@ function nextQuestion() {
     currentQuestionIndex++;
     if (currentQuestionIndex % questionsPerPhase === 0) {
         showPhaseCompletionMessage();
-        
     } else {
         loadQuestion();
     }
@@ -374,7 +372,12 @@ function showPhaseCompletionMessage() {
     currentPhase++;
     incorrectAnswers = 0;
 
+    if (currentPhase <= 3) {
+        setTimeout(() =>
+            loadQuestion(), 3000);
+    }
 }
+
 loadQuestion();
 
 const tooltip = document.getElementById('tooltip');
@@ -398,4 +401,3 @@ function addTooltipEvents(circleClass) {
 addTooltipEvents('green');
 addTooltipEvents('orange');
 addTooltipEvents('red');
-
