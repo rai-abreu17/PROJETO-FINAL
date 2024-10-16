@@ -4,6 +4,11 @@
     box-sizing: border-box;
 }
 
+html, body {
+    overflow-x: hidden;
+    background-color: black; /* Define o fundo preto, para eliminar o branco */
+}
+
 #naruto,
 #piece,
 #slayer,
@@ -16,9 +21,9 @@
 .imagem {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
-    position: relative;
-    background-color: black;
+    justify-content: center; 
+    gap: 15px;
+    padding: 5px;
 }
 
 #quiz {
