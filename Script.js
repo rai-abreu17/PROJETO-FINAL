@@ -261,7 +261,7 @@ const quizData = [
         level: 3
     }
 ];
-let nome = prompt("Qual seu nome de jogador(a)?")
+let name = prompt("Qual seu nome de jogador(a)?")
 
 let currentQuestionIndex = 0;
 let currentPhase = 1;
@@ -305,13 +305,15 @@ function loadQuestion() {
     questionElement.textContent = `${currentQuestionIndex + 1}. ${currentQuestion.question}`;
     quizContainer.appendChild(questionElement);
 
-    currentQuestion.answers.forEach((answerData, index) => {
+
+    for (let i = 0; i < currentQuestion.answers.length; i++) {
+        const answerData = currentQuestion.answers[i];
         const answerButton = document.createElement('button');
         answerButton.textContent = answerData.text;
         answerButton.className = "answer";
-        answerButton.onclick = () => checkAnswer(answerData.correct, index);
+        answerButton.onclick = () => checkAnswer(answerData.correct, i);
         buttonsContainer.appendChild(answerButton);
-    });
+    }
 
     quizContainer.appendChild(buttonsContainer);
 }
