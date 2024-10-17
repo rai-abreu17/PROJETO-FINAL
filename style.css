@@ -75,7 +75,6 @@ html, body {
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Indicadores de nível */
 .green, .orange, .red {
     width: 21px;
     height: 20px;
