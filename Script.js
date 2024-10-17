@@ -261,153 +261,146 @@ const quizData = [
         level: 3
     }
 ];
-let nome = prompt("Qual seu nome de jogador(a)?")
-
-let currentQuestionIndex = 0;
-let currentPhase = 1;
-let incorrectAnswers = 0;
-const maxIncorrectAnswers = 1;
-const questionsPerPhase = 8;
-
-function loadQuestion() {
-
-    const quizContainer = document.getElementById('quiz');
-    quizContainer.innerHTML = "";
-
-    let signalClass = "";
-    let signalTooltip = "";
-
-    if (currentPhase === 1) {
-        signalClass = "green";
-        signalTooltip = 'Questões de nível fácil';
-    } else if (currentPhase === 2) {
-        signalClass = "orange";
-        signalTooltip = 'Questões de nível médio';
-    } else if (currentPhase === 3) {
-        signalClass = "red";
-        signalTooltip = 'Questões de nível difícil';
+document.addEventListener('DOMContentLoaded', function() {
+    
+    let tooltip = document.getElementById('tooltip');
+    if (!tooltip) {
+        tooltip = document.createElement('div');
+        tooltip.id = 'tooltip';
+        document.body.appendChild(tooltip);
     }
 
-    const signal = document.createElement('div');
-    signal.className = signalClass;
-    signal.setAttribute("data-tooltip", signalTooltip);
-    quizContainer.appendChild(signal);
-
-    addTooltipEvents(signalClass);
-
-    const currentQuestion = quizData[currentQuestionIndex];
-    const questionElement = document.createElement('p');
-    questionElement.id = "idQuestion";
-
-    const buttonsContainer = document.createElement('div');
-    buttonsContainer.id = "idButtonsContainer";
-
-    questionElement.textContent = `${currentQuestionIndex + 1}. ${currentQuestion.question}`;
-    quizContainer.appendChild(questionElement);
-
-    /*currentQuestion.answers.forEach((answerData, index) => {
-        const answerButton = document.createElement('button');
-        answerButton.textContent = answerData.text;
-        answerButton.className = "answer";
-        answerButton.onclick = () => checkAnswer(answerData.correct, index);
-        buttonsContainer.appendChild(answerButton);
-    });*/
-
-
-    for (let i = 0; i < currentQuestion.answers.length; i++) {
-        const answerData = currentQuestion.answers[i];
-        const answerButton = document.createElement('button');
-        answerButton.textContent = answerData.text;
-        answerButton.className = "answer";
-        answerButton.onclick = () => checkAnswer(answerData.correct, i);
-        buttonsContainer.appendChild(answerButton);
+    let nome = '';
+    while (!nome) {
+        nome = prompt("Qual seu nome de jogador(a)?");
+        if (!nome) alert("Por favor, insira um nome válido!");
     }
 
-    quizContainer.appendChild(buttonsContainer);
-}
+    let currentQuestionIndex = 0;
+    let currentPhase = 1;
+    let incorrectAnswers = 0;
+    const maxIncorrectAnswers = 1;
+    const questionsPerPhase = 8;
 
-function checkAnswer(isCorrect, index) {
+    function loadQuestion() {
+        const quizContainer = document.getElementById('quiz');
+        if (!quizContainer) {
+            console.error('Elemento quiz não encontrado');
+            return;
+        }
 
-    const button = document.getElementsByClassName('answer')
+        quizContainer.innerHTML = "";
 
-    if (isCorrect) {
+        let signalClass = "";
+        let signalTooltip = "";
 
-        button[index].style.backgroundColor = "green";
+        if (currentPhase === 1) {
+            signalClass = "green";
+            signalTooltip = 'Questões de nível fácil';
+        } else if (currentPhase === 2) {
+            signalClass = "orange";
+            signalTooltip = 'Questões de nível médio';
+        } else if (currentPhase === 3) {
+            signalClass = "red";
+            signalTooltip = 'Questões de nível difícil';
+        }
 
-        setTimeout(() =>
-            nextQuestion(), 1000);
+        const signal = document.createElement('div');
+        signal.className = signalClass;
+        signal.setAttribute("data-tooltip", signalTooltip);
+        quizContainer.appendChild(signal);
 
-    } else {
-        incorrectAnswers++
-        button[index].style.backgroundColor = "red";
-        setTimeout(() =>
-            nextQuestion(), 1000);
+        addTooltipEvents(signalClass);
+
+        const currentQuestion = quizData[currentQuestionIndex];
+        const questionElement = document.createElement('p');
+        questionElement.id = "idQuestion";
+
+        const buttonsContainer = document.createElement('div');
+        buttonsContainer.id = "idButtonsContainer";
+
+        questionElement.textContent = `${currentQuestionIndex + 1}. ${currentQuestion.question}`;
+        quizContainer.appendChild(questionElement);
+
+        for (let i = 0; i < currentQuestion.answers.length; i++) {
+            const answerData = currentQuestion.answers[i];
+            const answerButton = document.createElement('button');
+            answerButton.textContent = answerData.text;
+            answerButton.className = "answer";
+            answerButton.onclick = () => checkAnswer(answerData.correct, i);
+            buttonsContainer.appendChild(answerButton);
+        }
+
+        quizContainer.appendChild(buttonsContainer);
     }
-}
 
-function nextQuestion() {
-    if (incorrectAnswers >= maxIncorrectAnswers) {
-        currentPhase = 1;
-        currentQuestionIndex = 0;
+    function checkAnswer(isCorrect, index) {
+        const buttons = document.getElementsByClassName('answer');
+        
+        if (isCorrect) {
+            buttons[index].style.backgroundColor = "green";
+            setTimeout(() => nextQuestion(), 1000);
+        } else {
+            incorrectAnswers++;
+            buttons[index].style.backgroundColor = "red";
+            setTimeout(() => nextQuestion(), 1000);
+        }
+    }
+
+    function nextQuestion() {
+        if (incorrectAnswers >= maxIncorrectAnswers) {
+            currentPhase = 1;
+            currentQuestionIndex = 0;
+            incorrectAnswers = 0;
+            loadQuestion();
+            alert(`Que pena ${nome}, você errou a pergunta. Tente novamente!`);
+            return;
+        }
+        
+        currentQuestionIndex++;
+        if (currentQuestionIndex % questionsPerPhase === 0) {
+            showPhaseCompletionMessage();
+        } else {
+            loadQuestion();
+        }
+    }
+
+    function showPhaseCompletionMessage() {
+        const quizContainer = document.getElementById('quiz');
+        if (!quizContainer) return;
+
+        const messages = {
+            1: `Parabéns jogador(a) ${nome}! Você passou pela primeira fase! Se prepare para a próxima fase.`,
+            2: `Você passou pela segunda fase jogador(a) ${nome}! Está quase chegando lá.`,
+            3: `Você é um mestre dos animes jogador(a) ${nome}! Completou todas as fases`
+        };
+
+        quizContainer.innerHTML = `<p>${messages[currentPhase] || 'Fase concluída!'}</p>`;
+        currentPhase++;
         incorrectAnswers = 0;
-        loadQuestion();
-        window.alert(`Que pena ${nome}, você errou a pergunta. Tente novamente!`);
-        return;
+
+        if (currentPhase <= 3) {
+            setTimeout(() => loadQuestion(), 3000);
+        }
     }
-    currentQuestionIndex++;
-    if (currentQuestionIndex % questionsPerPhase === 0) {
-        showPhaseCompletionMessage();
-    } else {
-        loadQuestion();
+
+    function addTooltipEvents(circleClass) {
+        const circle = document.querySelector(`.${circleClass}`);
+        if (!circle) return;
+
+        circle.addEventListener('mouseenter', (event) => {
+            const tooltipText = event.target.getAttribute('data-tooltip');
+            tooltip.innerText = tooltipText;
+            tooltip.style.display = 'block';
+            const rect = event.target.getBoundingClientRect();
+            tooltip.style.left = `${rect.left}px`;
+            tooltip.style.top = `${rect.bottom + 5}px`;
+        });
+
+        circle.addEventListener('mouseleave', () => {
+            tooltip.style.display = 'none';
+        });
     }
-}
 
-
-function showPhaseCompletionMessage() {
-    const quizContainer = document.getElementById('quiz');
-    let message = "";
-
-    switch (currentPhase) {
-        case 1:
-            message = `Parabéns jogador(a) ${nome} Você passou pela primeira fase!!! Se prepare para a próxima fase.`
-            break;
-        case 2:
-            message = `Você passou pela segunda fase jogador(a) ${nome}!!! Está quase chegando lá.`
-            break;
-        case 3:
-            message = `Você é um mestre dos animes jogador(a) ${nome}!!! Completou todas as fases`
-            break;
-    }
-    quizContainer.innerHTML = `<p>${message}</p>`;
-    currentPhase++;
-    incorrectAnswers = 0;
-
-    if (currentPhase <= 3) {
-        setTimeout(() =>
-            loadQuestion(), 3000);
-    }
-}
-
-loadQuestion();
-
-const tooltip = document.getElementById('tooltip');
-
-function addTooltipEvents(circleClass) {
-    const circle = document.querySelector(`.${circleClass}`);
-    circle.addEventListener('mouseenter', (event) => {
-        const tooltipText = event.target.getAttribute('data-tooltip');
-        tooltip.innerText = tooltipText;
-        tooltip.style.display = 'block';
-        const rect = event.target.getBoundingClientRect();
-        tooltip.style.left = `${rect.left}px`;
-        tooltip.style.top = `${rect.bottom + 5}px`;
-    });
-
-    circle.addEventListener('mouseleave', () => {
-        tooltip.style.display = 'none';
-    });
-}
-
-addTooltipEvents('green');
-addTooltipEvents('orange');
-addTooltipEvents('red');
+    loadQuestion();
+});
