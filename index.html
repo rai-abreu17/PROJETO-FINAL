@@ -3,58 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Quiz sobre animes populares como Naruto, One Piece, Demon Slayer, Jujutsu Kaisen e Dragon Ball">
+    <meta name="description" content="Jogo de corrida educativa - Desvie dos carros inimigos e teste seus reflexos">
     
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    
-    <title>Quiz de Animes</title>
+    <title>Corrida Educativa</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <main>
-        <section id="quiz" aria-live="polite"></section>
-        <div class="tooltip" id="tooltip" role="tooltip" aria-hidden="true"></div>
-        
-        <section class="imagem" aria-label="Personagens de anime">
-            <figure>
-                <img id="naruto" 
-                     src="./imagens/PersonagemNaruto.png" 
-                     alt="Personagem Naruto"
-                     loading="lazy">
-            </figure>
-            
-            <figure>
-                <img id="piece" 
-                     src="./imagens/PersonagemLuffy.png" 
-                     alt="Personagem Luffy de One Piece"
-                     loading="lazy">
-            </figure>
-            
-            <figure>
-                <img id="slayer" 
-                     src="./imagens/PersonagemDemonSlayer.png" 
-                     alt="Personagem de Demon Slayer"
-                     loading="lazy">
-            </figure>
-            
-            <figure>
-                <img id="jujutsu" 
-                     src="./imagens/PersonagemJujutsu.png" 
-                     alt="Personagem de Jujutsu Kaisen"
-                     loading="lazy">
-            </figure>
-            
-            <figure>
-                <img id="dragon" 
-                     src="./imagens/PersonagemDragonBall.png" 
-                     alt="Personagem de Dragon Ball"
-                     loading="lazy">
-            </figure>
-        </section>
-    </main>
+    <div id="gameContainer">
+        <canvas id="gameCanvas"></canvas>
+        <div id="gameOver" class="overlay hidden">
+            <h2>Game Over!</h2>
+            <p id="finalScore">Pontuação: 0</p>
+            <p>Pressione ESPAÇO para reiniciar</p>
+        </div>
+        <div id="score">Pontuação: 0</div>
+    </div>
 
     <script src="script.js" defer></script>
 </body>
